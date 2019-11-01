@@ -71,7 +71,8 @@ ActiveRecord::Schema.define(version: 2019_03_26_192810) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-    t.boolean "admin", default: false
+    #t.boolean "admin", default: false
+    t.boolean "admin", default: true
     t.string "license"
     t.string "tel"
     t.string "address"
