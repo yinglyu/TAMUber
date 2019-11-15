@@ -141,7 +141,7 @@ $(function () {
 
         // Aggie Map layer
         var layer = null,
-            layerUrl = "https://gis.tamu.edu/arcgis/rest/services/FCOR/BaseMap_011019/MapServer",
+            layerUrl = "https://gis.tamu.edu/arcgis/rest/services/FCOR/BaseMap_20191008/MapServer",
             layer = new TileLayer(layerUrl, null);
         map.layers.add(layer);
 

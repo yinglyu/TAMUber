@@ -71,7 +71,7 @@ group :test do
   	gem 'rails-controller-testing'
   	gem 'capybara', '~> 2.8'
   	gem 'launchy'
-  	gem 'ZenTest', '4.11.0'
+  	gem 'ZenTest', '4.11.2'
   	gem 'factory_girl', '~> 2.2'
   	gem 'webrat'
   	gem 'database_cleaner', '1.4.1'
