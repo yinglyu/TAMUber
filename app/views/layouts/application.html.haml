@@ -19,6 +19,7 @@
     // %script{:src => "//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js"}
     // %script{:src => "//underscorejs.org/underscore-min.js"}
 
+
   %body
     #remote_container
     %nav.navbar.navbar-expand-md.navbar-dark.bg-maroon
@@ -39,5 +40,10 @@
             %a.nav-link{:href => drivers_path} Drivers
           %li.nav-item
             %a.nav-link{:href => users_index_path} Admins
+    %div.container
+      #main
+        - if flash[:notice]
+          %div.alert.alert-danger
+            #notice.message= flash[:notice]
 
     = yield

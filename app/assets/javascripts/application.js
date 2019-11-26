@@ -24,7 +24,11 @@
 //= require fullcalendar
 //= require fullcalendar-columns
 //= require daterangepicker
-
+// model
+//= require jquery3
+//= require popper
+//= require bootstrap
+//= require data-confirm-modal
 
 
 function clearCalendar() {
@@ -114,6 +118,7 @@ $(function () {
         "esri/layers/TileLayer",
         "esri/Graphic",
         "esri/symbols/PictureMarkerSymbol",
+        "esri/layers/GraphicsLayer",
         "dojo/domReady!"
     ], function (Map, MapView, TileLayer, Graphic, PictureMarkerSymbol) {
         var map = new Map();
@@ -144,11 +149,13 @@ $(function () {
             layerUrl = "https://gis.tamu.edu/arcgis/rest/services/FCOR/BaseMap_20191008/MapServer",
             layer = new TileLayer(layerUrl, null);
         map.layers.add(layer);
-
+        
+        //fake car, need to read from database
         var popInfo = {
-            Driver: "Handong Hao",
-            Vehicle: "tamu_1",
-            Status: "Available"
+            Driver: "Dongwei Qi ",
+            Vehicle: "Bicycle",
+            Status: "Available",
+            Hungry: "yes"
         };
 
 
@@ -181,10 +188,17 @@ $(function () {
         setInterval(function () {
             // We change the latitude a little bit a time to create animation of car
             // By Quickly remove and add the icon, we make the car moves
-            point.latitude += 0.00001;
-            view.graphics.remove(pointGraphic);
+           // point.latitude += 0.00001;
+            //view.graphics.remove(pointGraphic);
             pointGraphic.geometry = point;
             view.graphics.add(pointGraphic);
+            //graphicsLayer.add(pointGraphic);
         }, 75);
     });
+    
 })
+$('a[data-popup]').live('click', function(e) { 
+  window.open( $(this).attr('href'), "Popup", "height=600, width=600" ); 
+  e.preventDefault(); 
+});
+
