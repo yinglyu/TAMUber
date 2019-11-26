@@ -24,9 +24,9 @@
 //= require fullcalendar
 //= require fullcalendar-columns
 //= require daterangepicker
-// model
-//= require jquery3
-//= require popper
+
+// For pop up confirmation:
+// require jquery3 => is conflict with jquery, will diable calendar
 //= require bootstrap
 //= require data-confirm-modal
 
