@@ -39,5 +39,9 @@
             %a.nav-link{:href => drivers_path} Drivers
           %li.nav-item
             %a.nav-link{:href => users_index_path} Admins
-
+    - flash.each do |type, msg|
+      %div{:class => "alert alert-#{type == :notice ? "success" : type} fadeout", "data-dismiss" => "alert"}
+        %button.close &times;
+        %strong
+          = msg if msg.is_a?(String)
     = yield
