@@ -89,5 +89,6 @@ gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'faker'
 gem 'momentjs-rails', '>= 2.9.0'
+gem 'ice_cube'
 # erb to haml
 gem "haml-rails", "~> 1.0"
