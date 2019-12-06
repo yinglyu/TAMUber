@@ -29,7 +29,7 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.title =  @driver.name
     @event.save
-    index
+    redirect_to schedules_path
   end
 
   def update
