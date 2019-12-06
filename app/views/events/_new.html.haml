@@ -2,7 +2,7 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
         %h4.modal-title Create New Event
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
       .modal-body
         = render 'form', event: @event
