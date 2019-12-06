@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token #make eventDrag eventResize work
   def index
-    @events = Event.where(start: params[:start]..params[:end])
+    @events = Event.all
     @drivers = Driver.all
     @col = {}
     i = 0
@@ -33,18 +33,15 @@ class EventsController < ApplicationController
   end
 
   def update
-    #@event.update(event_params)
-    respond_to do |format|
-      if @event.update(event_params)
-        format.json  { render :json => @event, :status => :ok}
-      else # response error when rollback
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
+    @driver = Driver.find(event_params[:driver_id])
+    @event.update(event_params)
+    @event.update(title: @driver.name)
+    redirect_to schedules_path
   end
 
   def destroy
     @event.destroy
+    redirect_to schedules_path
   end
 
   private
@@ -53,6 +50,6 @@ class EventsController < ApplicationController
     end
 
     def event_params
-      params.require(:event).permit(:title, :date_range, :start, :end, :driver_id)
+      params.require(:event).permit(:title, :date_range, :start, :end, :driver_id, :frequency)
     end
 end

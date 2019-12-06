@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_02_013939) do
+ActiveRecord::Schema.define(version: 2019_12_06_163154) do
 
   create_table "drivers", force: :cascade do |t|
     t.string "name"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_12_02_013939) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "driver_id"
+    t.integer "frequency", default: 0
     t.index ["driver_id"], name: "index_events_on_driver_id"
   end
 

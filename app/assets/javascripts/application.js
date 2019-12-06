@@ -61,7 +61,7 @@ initialize_calendar = function () {
             // Friday and the coming Monday, where Monday corresponds to Friday's second column.
             // Care is taken to make this trick transparent to the user (you) but in some cases this is not 100% possible.
             // For example, some View Object properties such as end do not contain the "correct" value.
-            defaultView: 'multiColAgendaDay',
+            defaultView: 'month',
             events: '/events.json',
             views: {
                 multiColAgendaDay:
@@ -70,7 +70,9 @@ initialize_calendar = function () {
                     duration: { days: 1 },
                     numColumns: gon.driver_num,
                     columnHeaders: gon.drivers_name,
-                    buttonText: 'drivers'
+                    buttonText: 'drivers',
+                    selectable: false,
+                    editable: false
                     // ,
                 }
             },
@@ -110,7 +112,7 @@ initialize_calendar = function () {
 };
 $(document).on('turbolinks:load', initialize_calendar);
 
-function changeEvent (event, delta, revertFunc) {
+function changeEvent ( event, delta, revertFunc, jsEvent, ui, view) {
     if (moment(event.start).format('l') !== moment(event.end).format('l')){
         revertFunc();
         alert("Invalid change. Start and end should on the same day.");
@@ -122,6 +124,7 @@ function changeEvent (event, delta, revertFunc) {
     }
     event_data = {
         event: {
+            driver_id: event.driver_id,
             id: event.id,
             start: event.start.format(),
             end: event.end.format()
@@ -135,7 +138,7 @@ function changeEvent (event, delta, revertFunc) {
         error: AjaxFailed
     });
     function AjaxSucceeded(result) {
-        alert("Update success for " +  event.title  +  "\n" +moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("MM/DD/YYYY HH:mm") );
+        alert("Update success for " +  event.title  +  "\n" + moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("HH:mm") );
     }
     function AjaxFailed(result) {
         alert("Update fail.");
