@@ -69,15 +69,15 @@ Rails.application.configure do
 	# Ignore bad email addresses and do not raise email delivery errors.
 	# Set this to true and configure the email server for immediate delivery to raise delivery errors.
 	config.action_mailer.raise_delivery_errors = true
-	config.action_mailer.default_url_options = { host: "http://localhost:3000"}
+	config.action_mailer.default_url_options = { host: "https://tamuber-vehicles-19fall.herokuapp.com"}
 	config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings = {
 		:address => "smtp.gmail.com",
 		:port => "587",
 		:domain => "gmail.com",
-		:authentication => "plain",
-		:user_name => "tamuerinterface@gmail.com", #你的信箱
-		:password => "hairprotection", #信箱密碼
+		:authentication => :plain,
+		:user_name => "tamubervehicle@gmail.com", # your email address
+		:password => "DontCodeTogether", # password for your email
 		:enable_starttls_auto => true
 	}
 

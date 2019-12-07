@@ -44,8 +44,8 @@ Rails.application.configure do
   	:port => "587",
   	:domain => "gmail.com",
   	:authentication => :plain,
-  	:user_name => "tamubervehicle@gmail.com", #你的信箱
-		:password => "DontCodeTogether", #信箱密碼
+  	:user_name => "tamubervehicle@gmail.com", # your email address
+		:password => "DontCodeTogether", # password for your email
   	:enable_starttls_auto => true
   }
 
