@@ -1,6 +1,7 @@
 class Event < ApplicationRecord
   enum frequency: { once: 0, weekly: 1, biweekly: 2, monthly: 3}
-  belongs_to :driver
+  belongs_to :driver, :class_name => "Driver", :foreign_key => "driver_id"
+  validates :driver, presence: true
   validates :title, presence: true
   validates :start, presence: true
   validates :end, presence: true
