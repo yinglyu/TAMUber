@@ -38,7 +38,7 @@ Rails.application.configure do
 
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "http://localhost:3000"} #你的網址,絕對網址
+  config.action_mailer.default_url_options = { host: "http://localhost:3000"} #your absolute url
   config.action_mailer.smtp_settings = {
   	:address => "smtp.gmail.com",
   	:port => "587",
