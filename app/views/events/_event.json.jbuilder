@@ -11,5 +11,5 @@ json.array! recur_events do |recur_event|
   json.allDay false
   json.update_url event_path(event, method: :patch)
   json.edit_url edit_event_path(event)
-  json.column @col[event.driver_id]
+  json.column $col[event.driver_id]
 end

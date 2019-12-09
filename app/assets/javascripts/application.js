@@ -127,7 +127,7 @@ function changeEvent ( event, delta, revertFunc, jsEvent, ui, view) {
         return;
     }
     event_data = {
-        event: {
+        single_event: {
             driver_id: event.driver_id,
             id: event.id,
             start: event.start.format(),
