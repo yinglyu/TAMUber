@@ -24,7 +24,8 @@
 						%td= driver.license	
 						%td= driver.tel
 						%td= driver.address	
-						%td= link_to 'Update ' + driver.name, edit_driver_path(driver), :class => "btn btn-outline-primary"
-						%td= button_to 'Delete ' + driver.name, driver_path(driver), :method => :delete, :confirm => 'Are you sure?', :class => "btn btn-outline-danger"
+						%td= link_to 'Update', edit_driver_path(driver), :class => "btn btn-outline-primary"
+						%td= link_to 'Delete', driver_path(driver), :method => :delete, data: {confirm: 'Delete driver ' + driver.name + '?', title: "Confirmation", commit: 'YES', cancel: 'NO' }, :class => "btn btn-outline-danger"
+						//%td= button_to 'Delete ' + driver.name, driver_path(driver), :method => :delete, :confirm => 'Are you sure?', :class => "btn btn-outline-danger"
 
 	= link_to 'Add New Driver', new_driver_path, :class => "btn btn-outline-primary"
