@@ -25,6 +25,10 @@
 //= require fullcalendar-columns
 //= require daterangepicker
 
+// For pop up confirmation:
+// require jquery3 => is conflict with jquery, will diable calendar
+//= require bootstrap
+//= require data-confirm-modal
 
 
 function clearCalendar() {
@@ -123,7 +127,7 @@ function changeEvent ( event, delta, revertFunc, jsEvent, ui, view) {
         return;
     }
     event_data = {
-        event: {
+        single_event: {
             driver_id: event.driver_id,
             id: event.id,
             start: event.start.format(),
@@ -153,6 +157,7 @@ $(function () {
         "esri/layers/TileLayer",
         "esri/Graphic",
         "esri/symbols/PictureMarkerSymbol",
+        "esri/layers/GraphicsLayer",
         "dojo/domReady!"
     ], function (Map, MapView, TileLayer, Graphic, PictureMarkerSymbol) {
         var map = new Map();
@@ -186,11 +191,14 @@ $(function () {
             layer = new TileLayer(layerUrl, null);
         map.layers.add(layer);
 
+
         /*
+
         var popInfo = {
-            Driver: "Handong Hao",
-            Vehicle: "tamu_1",
-            Status: "Available"
+            Driver: "Dongwei Qi ",
+            Vehicle: "Bicycle",
+            Status: "Available",
+            Hungry: "yes"
         };
         
 
@@ -224,6 +232,7 @@ $(function () {
         setInterval(function () {
             // We change the latitude a little bit a time to create animation of car
             // By Quickly remove and add the icon, we make the car moves
+
             
             $.ajax({
                 //type:"GET",
@@ -317,5 +326,12 @@ $(function () {
             view.graphics.add(pointGraphic);
             */
         }, 5000);
+
     });
+    
 })
+$('a[data-popup]').live('click', function(e) { 
+  window.open( $(this).attr('href'), "Popup", "height=600, width=600" ); 
+  e.preventDefault(); 
+});
+
