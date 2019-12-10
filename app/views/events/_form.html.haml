@@ -12,5 +12,5 @@
       @event,                                 |
       method: :delete,                       |
       class: 'btn btn-danger',               |
-      data: { confirm: 'Are you sure?' },    |
+      data: {confirm: 'Delete event of ' + event.title + ' on ' + event.start.strftime('%m/%d/%Y %H:%M %p') +'-'+ event.end.strftime('%H:%M %p')+ '?' , title: "Confirmation", commit: 'YES' },   |
       remote: true unless @event.new_record? |

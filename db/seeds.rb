@@ -1,38 +1,34 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-Vehicle.create([
-	{ name: "LBY0920" },
-	{ name: "LGL2724" },
-	{ name: "LBJ7777" },
-	{ name: "DAV2483" },
-	{ name: "LJX5347" },
-	{ name: "MVC3948" },
-	{ name: "CRU2948" },
-	{ name: "LKK2431" },
-	{ name: "LAG8787" },
-	{ name: "GTA9992" },
+User.create!([
+  {email: "admin@tamu.edu", encrypted_password: "$2a$11$mP6M8u.Q/d8JXJ21Drq3UevuW26/1Mutz.7jU3qvWx1sWkj2mK6oW", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, name: "admin", admin: false, license: nil, tel: nil, address: nil, confirmation_token: "xSVwSWPpGFREbAHN9hp3", confirmed_at: "2019-12-10 21:50:01", confirmation_sent_at: "2019-12-10 21:49:40", unconfirmed_email: nil}
 ])
-
-Driver.create([
-	{ name: "Jeff Chang" },
-	{ name: "Jack Wu" },
-	{ name: "Amy Chien" },
-	{ name: "Joe Chou" },
-	{ name: "Grace Yang" },
-	{ name: "Sean Chen" },
-	{ name: "Jeremy Lin" },
-	{ name: "Stephen Harden" },
-	{ name: "Scottie Payton" },
-	{ name: "Jerry  Griffin" },
+Driver.create!([
+  {name: "Jeff Chang", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Jack Wu", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Amy Chien", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Joe Chou", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Grace Yang", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Sean Chen", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Jeremy Lin", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Stephen Harden", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Scottie Payton", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
+  {name: "Jerry  Griffin", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil}
 ])
-
-
-connection = ActiveRecord::Base.connection();
-# Execute a sql statement
-connection.execute("INSERT INTO users (email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, created_at, updated_at, name, admin, license, tel, address, confirmation_token, confirmed_at, confirmation_sent_at, unconfirmed_email) VALUES ('admin@tamu.edu', '$2a$11$mP6M8u.Q/d8JXJ21Drq3UevuW26/1Mutz.7jU3qvWx1sWkj2mK6oW', null, null, null, '2019-12-10 21:49:40.395501', '2019-12-10 21:50:01.816273', 'admin', 0, null, null, null, 'xSVwSWPpGFREbAHN9hp3', '2019-12-10 21:50:01.815552', '2019-12-10 21:49:40.395610', null);")
+Event.create!([
+  {title: "Sean Chen", start: "2019-12-11 07:00:00", end: "2019-12-11 10:30:00", driver_id: 6, frequency: "once"},
+  {title: "Grace Yang", start: "2019-12-11 10:00:00", end: "2019-12-11 13:30:00", driver_id: 5, frequency: "biweekly"},
+  {title: "Jeff Chang", start: "2019-12-20 07:30:00", end: "2019-12-20 14:00:00", driver_id: 1, frequency: "weekly"},
+  {title: "Amy Chien", start: "2019-12-11 12:00:00", end: "2019-12-11 16:00:00", driver_id: 3, frequency: "once"},
+  {title: "Scottie Payton", start: "2019-12-11 14:00:00", end: "2019-12-11 18:30:00", driver_id: 9, frequency: "once"}
+])
+Vehicle.create!([
+  {name: "LBY0920", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "LGL2724", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "LBJ7777", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "DAV2483", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "LJX5347", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "MVC3948", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "CRU2948", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "LKK2431", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "LAG8787", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil},
+  {name: "GTA9992", isAvailable: true, tire_pressure: nil, battery: nil, occupancy: nil}
+])
