@@ -10,5 +10,17 @@
 		.form-group
 			= label :vehicle, :isAvailable, 'Is Available? (true/false)'
 			= text_field :vehicle, :isAvailable, :class => "form-control"
+			
+		.form-group
+			= label :vehicle, :tire_pressure, 'Tire Pressure'
+			= text_field :vehicle, :tire_pressure, :class => "form-control"
 
+		.form-group
+			= label :vehicle, :battery, 'Battery (%)'
+			= text_field :vehicle, :battery, :class => "form-control"
+
+		.form-group
+			= label :vehicle, :occupancy, 'Occupancy (%)'
+			= text_field :vehicle, :occupancy, :class => "form-control"
+			
 		= submit_tag 'Create Vehicle', :class => "btn btn-outline-primary"
