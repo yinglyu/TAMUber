@@ -64,24 +64,25 @@ Rails.application.configure do
 	# config.active_job.queue_name_prefix = "VehicleInterface_#{Rails.env}"
 
 	config.action_mailer.perform_caching = false
-	config.action_mailer.default_url_options = { :host => '34.227.214.181' }
 
 	# Ignore bad email addresses and do not raise email delivery errors.
 	# Set this to true and configure the email server for immediate delivery to raise delivery errors.
 	config.action_mailer.raise_delivery_errors = true
-	config.action_mailer.default_url_options = { host: "http://localhost:3000"}
+
+
 	config.action_mailer.delivery_method = :smtp
+	config.action_mailer.default_url_options = { host: "https://tamuber-shaohua-yuan.herokuapp.com/"} #deploy URL
 	config.action_mailer.smtp_settings = {
-		:address => "smtp.gmail.com",
-		:port => "587",
-		:domain => "gmail.com",
-		:authentication => "plain",
-		:user_name => "tamuerinterface@gmail.com", #你的信箱
-		:password => "hairprotection", #信箱密碼
-		:enable_starttls_auto => true
+			:address => "smtp.gmail.com",
+			:port => "587",
+			:domain => "gmail.com",
+			:authentication => :plain,
+			:user_name => "tamubervehicle@gmail.com", #email account
+			:password => "DontCodeTogether", #email password
+			:enable_starttls_auto => true
 	}
 
-	
+
 	# Enable locale fallbacks for I18n (makes lookups for any locale fall back to
 	# the I18n.default_locale when a translation cannot be found).
 	config.i18n.fallbacks = true
