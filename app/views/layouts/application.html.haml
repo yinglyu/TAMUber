@@ -42,9 +42,16 @@
             %a.nav-link{:href => users_index_path} Admins
 
     %div.container
-      #main
-        - if flash[:notice]
-          %div.alert.alert-danger
-            #notice.message= flash[:notice]
+      - flash.each do |type, msg|
+        %div{:class => "alert alert-danger fadeout", "data-dismiss" => "alert"}
+          %button.close &times;
+          %strong
+            = msg if msg.is_a?(String)
+
+    -#%div.container
+    -#  #main
+    -#    - if flash[:notice]
+    -#      %div.alert.alert-danger
+    -#        #notice.message= flash[:notice]
 
     = yield
