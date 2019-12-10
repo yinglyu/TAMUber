@@ -13,6 +13,7 @@ class OndutiesController < ApplicationController
 
 	def index
 		@onduties = Onduty.where(:isFinished => false)
+		
 	end
 
 	def new
@@ -43,6 +44,13 @@ class OndutiesController < ApplicationController
 	end
 
 	def update_car_pos
+		onduty=Onduty.where(isFinished: false)
+
+		respond_to do |format|
+			format.json {render json: onduty}
+		end
+		
+=begin
 		onduty = Onduty.find_by_id(params[:id_])
 		if params[:isFinished] == 'true'
 			att = {:isFinished => true}
@@ -61,5 +69,6 @@ class OndutiesController < ApplicationController
 			att = {:vehicleLng => params[:lng], :vehicleLat => params[:lat]}
 		end
 		onduty.update_attributes!(att)
+=end
 	end
 end

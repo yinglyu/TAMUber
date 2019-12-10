@@ -31,3 +31,27 @@ Driver.create([
 	{ name: "Scottie Payton" },
 	{ name: "Jerry  Griffin" },
 ])
+
+
+Onduty.create([
+	{
+		driverName: "Jeff Chang",
+		plateNumber: "LBY0920",
+		studentId: "123456",
+		studentName: "HHH",
+		vehicleLat: 30.61348,
+		vehicleLng: -96.35539,
+		isFinished: false
+	},
+	{
+		driverName: "Jack Wu",
+		plateNumber: "LGL2724",
+		studentId: "654321",
+		studentName: "rerorero",
+		vehicleLat: 30.61368,
+		vehicleLng: -96.35549,
+		isFinished: false
+	}
+	]
+)
+
