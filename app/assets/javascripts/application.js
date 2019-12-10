@@ -25,6 +25,10 @@
 //= require fullcalendar-columns
 //= require daterangepicker
 
+// For pop up confirmation:
+// require jquery3 => is conflict with jquery, will diable calendar
+//= require bootstrap
+//= require data-confirm-modal
 
 
 function clearCalendar() {
@@ -39,19 +43,29 @@ initialize_calendar = function () {
         var calendar = $(this);
         calendar.fullCalendar({
             header: {
-                left: 'prev,next today',
+                left: 'prev,next today multiColAgendaDay',
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay'
             },
             selectable: true,
             selectHelper: true,
+            selectConstraint:{
+                start: '00:01',
+                end: '23:59',
+            },
             editable: true,
             eventLimit: true,
             allDaySlot: false,
             displayEventTime:false,
-            eventColor: '#378006',
-            // Below is the multiCol for Drivers display
-            defaultView: 'multiColAgendaDay',
+            //eventColor: '#378006',
+            eventColor: '#a0e3e8',
+            // Below is the multiCol for Drivers display,
+            // The implementation works by tricking FullCalendar into displaying columns as separate days.
+            // For example: A Friday with two columns is rendered behind the scenes by asking FullCalendar to draw two days,
+            // Friday and the coming Monday, where Monday corresponds to Friday's second column.
+            // Care is taken to make this trick transparent to the user (you) but in some cases this is not 100% possible.
+            // For example, some View Object properties such as end do not contain the "correct" value.
+            defaultView: 'month',
             events: '/events.json',
             views: {
                 multiColAgendaDay:
@@ -60,15 +74,23 @@ initialize_calendar = function () {
                     duration: { days: 1 },
                     numColumns: gon.driver_num,
                     columnHeaders: gon.drivers_name,
+                    buttonText: 'drivers',
+                    selectable: false,
+                    editable: false
                     // ,
                 }
             },
             dayClick: function (date, jsEvent, view) {
-                $('#calendar').fullCalendar('changeView', 'agendaDay')
+                $('#calendar').fullCalendar('changeView', 'agendaDay');
                 $('#calendar').fullCalendar('gotoDate', date);
             },
             
-            select: function (start, end) {
+            select: function (start, end, jsEvent, view) {
+                if (view.name === 'multiColAgendaDay'){
+                    calendar.fullCalendar('unselect');
+                    alert("You can create event in week and day view.");
+                    return;
+                }
                 $.getScript('/events/new', function () {
                     $('#event_date_range').val(moment(start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(end).format("MM/DD/YYYY HH:mm"))
                     date_range_picker();
@@ -79,21 +101,8 @@ initialize_calendar = function () {
                 calendar.fullCalendar('unselect');
             },
 
-            eventDrop: function (event, delta, revertFunc) {
-                event_data = {
-                    event: {
-                        id: event.id,
-                        start: event.start.format(),
-                        end: event.end.format()
-                    }
-                };
-                $.ajax({
-                    url: event.update_url,
-                    data: event_data,
-                    type: 'PATCH'
-                });
-            },
-
+            eventDrop: changeEvent,
+            eventResize: changeEvent,
             eventClick: function (event, jsEvent, view) {
                 $.getScript(event.edit_url, function () {
                     $('#event_date_range').val(moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("MM/DD/YYYY HH:mm"))
@@ -107,6 +116,40 @@ initialize_calendar = function () {
 };
 $(document).on('turbolinks:load', initialize_calendar);
 
+function changeEvent ( event, delta, revertFunc, jsEvent, ui, view) {
+    if (moment(event.start).format('l') !== moment(event.end).format('l')){
+        revertFunc();
+        alert("Invalid change. Start and end should on the same day.");
+        return;
+    }
+    if(!confirm("Are you sure about this change?")) {
+        revertFunc();
+        return;
+    }
+    event_data = {
+        single_event: {
+            driver_id: event.driver_id,
+            id: event.id,
+            start: event.start.format(),
+            end: event.end.format()
+        }
+    };
+    $.ajax({
+        url: event.update_url,
+        data: event_data,
+        type: 'PATCH',
+        success: AjaxSucceeded,
+        error: AjaxFailed
+    });
+    function AjaxSucceeded(result) {
+        alert("Update success for " +  event.title  +  "\n" + moment(event.start).format("MM/DD/YYYY HH:mm") + ' - ' + moment(event.end).format("HH:mm") );
+    }
+    function AjaxFailed(result) {
+        alert("Update fail.");
+        revertFunc();
+    }
+}
+
 $(function () {
     require([
         "esri/Map",
@@ -114,6 +157,7 @@ $(function () {
         "esri/layers/TileLayer",
         "esri/Graphic",
         "esri/symbols/PictureMarkerSymbol",
+        "esri/layers/GraphicsLayer",
         "dojo/domReady!"
     ], function (Map, MapView, TileLayer, Graphic, PictureMarkerSymbol) {
         var map = new Map();
@@ -141,14 +185,16 @@ $(function () {
 
         // Aggie Map layer
         var layer = null,
-            layerUrl = "https://gis.tamu.edu/arcgis/rest/services/FCOR/BaseMap_011019/MapServer",
+            layerUrl = "https://gis.tamu.edu/arcgis/rest/services/FCOR/BaseMap_20191008/MapServer",
             layer = new TileLayer(layerUrl, null);
         map.layers.add(layer);
-
+        
+        //fake car, need to read from database
         var popInfo = {
-            Driver: "Handong Hao",
-            Vehicle: "tamu_1",
-            Status: "Available"
+            Driver: "Dongwei Qi ",
+            Vehicle: "Bicycle",
+            Status: "Available",
+            Hungry: "yes"
         };
 
 
@@ -181,10 +227,17 @@ $(function () {
         setInterval(function () {
             // We change the latitude a little bit a time to create animation of car
             // By Quickly remove and add the icon, we make the car moves
-            point.latitude += 0.00001;
-            view.graphics.remove(pointGraphic);
+           // point.latitude += 0.00001;
+            //view.graphics.remove(pointGraphic);
             pointGraphic.geometry = point;
             view.graphics.add(pointGraphic);
+            //graphicsLayer.add(pointGraphic);
         }, 75);
     });
+    
 })
+$('a[data-popup]').live('click', function(e) { 
+  window.open( $(this).attr('href'), "Popup", "height=600, width=600" ); 
+  e.preventDefault(); 
+});
+

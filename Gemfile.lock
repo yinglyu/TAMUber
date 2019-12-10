@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    ZenTest (4.11.0)
+    ZenTest (4.11.2)
     actioncable (5.2.2.1)
       actionpack (= 5.2.2.1)
       nio4r (~> 2.0)
@@ -110,6 +110,8 @@ GEM
       cucumber-rails (>= 1.1.1)
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
+    data-confirm-modal (1.6.2)
+      railties (>= 3.0)
     database_cleaner (1.4.1)
     devise (4.6.2)
       bcrypt (~> 3.0)
@@ -157,6 +159,7 @@ GEM
       ruby_parser (~> 3.5)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
+    ice_cube (0.16.3)
     io-like (0.3.0)
     jbuilder (2.8.0)
       activesupport (>= 4.2.0)
@@ -352,7 +355,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  ZenTest (= 4.11.0)
+  ZenTest (= 4.11.2)
   bcrypt-ruby (~> 3.0.0)
   bootsnap (>= 1.1.0)
   bootstrap
@@ -363,6 +366,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   cucumber-rails
   cucumber-rails-training-wheels
+  data-confirm-modal
   database_cleaner (= 1.4.1)
   devise
   factory_girl (~> 2.2)
@@ -373,6 +377,7 @@ DEPENDENCIES
   gon
   haml
   haml-rails (~> 1.0)
+  ice_cube
   jbuilder (~> 2.5)
   jquery-rails
   js-routes

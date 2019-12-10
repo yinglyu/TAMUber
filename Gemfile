@@ -1,3 +1,4 @@
+#source /etc/profile.d/rvm.sh
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -41,6 +42,8 @@ gem 'bootstrap'
 # Access rails routes by javascript
 gem "js-routes"
 
+#popup message
+gem 'data-confirm-modal'
 
 group :development, :test do
 	# Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -71,7 +74,7 @@ group :test do
   	gem 'rails-controller-testing'
   	gem 'capybara', '~> 2.8'
   	gem 'launchy'
-  	gem 'ZenTest', '4.11.0'
+  	gem 'ZenTest', '4.11.2'
   	gem 'factory_girl', '~> 2.2'
   	gem 'webrat'
   	gem 'database_cleaner', '1.4.1'
@@ -88,5 +91,6 @@ gem 'simple_form'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'faker'
 gem 'momentjs-rails', '>= 2.9.0'
+gem 'ice_cube'
 # erb to haml
 gem "haml-rails", "~> 1.0"
