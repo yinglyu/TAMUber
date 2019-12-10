@@ -71,8 +71,8 @@ Rails.application.configure do
 
 
 	config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "https://tamuber-shaohua-yuan.herokuapp.com/"} #deploy URL
-  #config.action_mailer.default_url_options = { host: "https://tamuber-vehicles-19fall.herokuapp.com/"} #deploy URL
+  #config.action_mailer.default_url_options = { host: "https://tamuber-shaohua-yuan.herokuapp.com/"} #deploy URL
+  config.action_mailer.default_url_options = { host: "https://tamuber-vehicles-19fall.herokuapp.com/"} #deploy URL
   config.action_mailer.smtp_settings = {
 			:address => "smtp.gmail.com",
 			:port => "587",
