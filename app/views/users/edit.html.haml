@@ -1,0 +1,10 @@
+.container
+	%h1 Edit User #{@user.name}
+
+	= form_tag user_path(@user), :method => :put do
+
+		.form-group
+			= label :user, :name, 'User Name'
+			= text_field :user, :name, :class => "form-control"
+
+		= submit_tag 'Update User Info', :class => "btn btn-outline-primary"
