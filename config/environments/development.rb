@@ -37,17 +37,17 @@ Rails.application.configure do
 
 
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "http://localhost:3000"} #你的網址,絕對網址
-  config.action_mailer.smtp_settings = {
-  	:address => "smtp.gmail.com",
-  	:port => "587",
-  	:domain => "gmail.com",
-  	:authentication => :plain,
-  	:user_name => "tamubervehicle@gmail.com", #你的信箱
-		:password => "DontCodeTogether", #信箱密碼
-  	:enable_starttls_auto => true
-  }
+	config.action_mailer.delivery_method = :smtp
+	config.action_mailer.default_url_options = { host: "http://localhost:3000"} #deploy URL
+	config.action_mailer.smtp_settings = {
+			:address => "smtp.gmail.com",
+			:port => "587",
+			:domain => "gmail.com",
+			:authentication => :plain,
+			:user_name => "tamubervehicle@gmail.com", #email account
+			:password => "DontCodeTogether", #email password
+			:enable_starttls_auto => true
+	}
 
 	config.action_mailer.perform_caching = false
 

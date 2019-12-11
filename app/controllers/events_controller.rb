@@ -1,15 +1,15 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
   skip_before_action :verify_authenticity_token #make eventDrag eventResize work
+  $col = {}
+  i = 0
+  @drivers = Driver.all
+  @drivers.each do |item|
+    $col[item.id] = i
+    i+=1
+  end
   def index
     @events = Event.all
-    @drivers = Driver.all
-    @col = {}
-    i = 0
-    @drivers.each do |item|
-      @col[item.id] = i
-      i+=1
-    end
   end
 
   def show
@@ -33,10 +33,17 @@ class EventsController < ApplicationController
   end
 
   def update
-    @driver = Driver.find(event_params[:driver_id])
-    @event.update(event_params)
-    @event.update(title: @driver.name)
-    redirect_to schedules_path
+    if params[:single_event]
+      @event.update(start: params[:single_event][:start])
+      @event.update(end: params[:single_event][:end])
+    else
+      @driver = Driver.find(event_params[:driver_id])
+      @old_driver_id = @event.driver_id
+      @old_frequency = @event.frequency
+      @event.update(event_params)
+      @event.update(title: @driver.name)
+      redirect_to schedules_path
+    end
   end
 
   def destroy
