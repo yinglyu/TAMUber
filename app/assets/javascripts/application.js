@@ -243,7 +243,7 @@ $(function () {
                 
                 success: function(result){
                     
-                    
+                    var id=17;
                     var curpoint=result;
                     var point = {
                             type: "point",
