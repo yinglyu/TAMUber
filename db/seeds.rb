@@ -1,6 +1,5 @@
-User.create!([
-  {email: "admin@tamu.edu", encrypted_password: "$2a$11$mP6M8u.Q/d8JXJ21Drq3UevuW26/1Mutz.7jU3qvWx1sWkj2mK6oW", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, name: "admin", admin: false, license: nil, tel: nil, address: nil, confirmation_token: "xSVwSWPpGFREbAHN9hp3", confirmed_at: "2019-12-10 21:50:01", confirmation_sent_at: "2019-12-10 21:49:40", unconfirmed_email: nil}
-])
+
+
 Driver.create!([
   {name: "Jeff Chang", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
   {name: "Jack Wu", isAvailable: true, Email: nil, UIN: nil, license: nil, tel: nil, address: nil},
