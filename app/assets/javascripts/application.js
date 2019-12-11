@@ -234,17 +234,17 @@ $(function () {
             // By Quickly remove and add the icon, we make the car moves
 
             $.ajax({
-                type:"GET",
-                //type:"POST",
-                
-                url: 'https://tamubersafety.herokuapp.com/dashboard/17',
-                data:{  },
-                //url:"onduties/update_car_pos",
+                //type:"GET",
+                type:"POST",
+                url:"/onduties/update_car_pos",
+                //url: 'https://tamubersafety.herokuapp.com/dashboard/17',
+                data:{},
                 
                 success: function(result){
                     
-                    var id=17;
+                    /*var id=17;
                     var curpoint=result;
+                    
                     var point = {
                             type: "point",
                             
@@ -291,8 +291,8 @@ $(function () {
                         view.graphics.remove(pointGraphic);
                         pointGraphic.geometry = point;
                         view.graphics.add(pointGraphic);
-                        
-                    /*
+                        */
+                    
                     for(i=0;i<result.length;i++)
                     {
                         var curpoint=result[i];
@@ -338,10 +338,10 @@ $(function () {
                         pointGraphic.geometry = point;
                         view.graphics.add(pointGraphic);
                         
-                    }*/
+                    }
                 },
                 error: function(result){
-                    alert("fail");
+                    alert("For cross domain, visit https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en-US");
                 }
             });
             /*

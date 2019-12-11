@@ -1,7 +1,7 @@
 class OndutiesController < ApplicationController
 	skip_before_action :verify_authenticity_token
 	before_action :authenticate_user!
-	before_action :get_onduty, :only => [:show, :edit, :update, :destroy,:update_car_pos]
+	before_action :get_onduty, :only => [:show, :edit, :update, :destroy]
 
 	def get_onduty
 		@onduty = Onduty.find params[:id]
