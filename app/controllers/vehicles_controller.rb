@@ -40,6 +40,6 @@ class VehiclesController < ApplicationController
 	private 
 		def vehicle_params
 			params.require(:vehicle).permit(:name,:isAvailable,
-																			:tire_pressure,:battery,:occupancy)
+											:tire_pressure,:battery,:occupancy)
 		end	
 end
