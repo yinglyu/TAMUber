@@ -1,7 +1,7 @@
 .container
 	#viewDiv
 		#amap
-	%h3 #{flash[:notice]}
+	// %h3 #{flash[:notice]}
 
 	.table-responsive
 		%table#Onduties.table
@@ -14,10 +14,10 @@
 					%th StudentId
 					%th VehicleLat
 					%th VehicleLng
-					%th Startlat
-					%th Startlng
-					%th Endlat
-					%th Endlng
+				//	%th Startlat
+				//	%th Startlng
+				//	%th Endlat
+				//	%th Endlng
 
 			%tbody
 				- @onduties.each do |onduty|
@@ -29,10 +29,10 @@
 						%td= onduty.studentId
 						%td= onduty.vehicleLat
 						%td= onduty.vehicleLng
-						%td= onduty.startLat
-						%td= onduty.startLng
-						%td= onduty.endLat
-						%td= onduty.endLng
+				//		%td= onduty.startLat
+				//		%td= onduty.startLng
+				//		%td= onduty.endLat
+				//		%td= onduty.endLng
 
 :css
 	#viewDiv {
