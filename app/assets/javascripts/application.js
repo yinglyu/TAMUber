@@ -161,12 +161,14 @@ $(function () {
         "dojo/domReady!"
     ], function (Map, MapView, TileLayer, Graphic, PictureMarkerSymbol) {
         var map = new Map();
+        /*
         var point = {
             type: "point",
             longitude: -96.35539,
             latitude: 30.61348
         };
-
+        */
+        
         // Create symbol for cars
         var carSymbol = {
             type: "picture-marker",
@@ -188,15 +190,17 @@ $(function () {
             layerUrl = "https://gis.tamu.edu/arcgis/rest/services/FCOR/BaseMap_20191008/MapServer",
             layer = new TileLayer(layerUrl, null);
         map.layers.add(layer);
-        
-        //fake car, need to read from database
+
+
+        /*
+
         var popInfo = {
             Driver: "Dongwei Qi ",
             Vehicle: "Bicycle",
             Status: "Available",
             Hungry: "yes"
         };
-
+        
 
         var pointGraphic = new Graphic({
             geometry: point,
@@ -223,16 +227,106 @@ $(function () {
                 ]
             }
         });
+        */
 
         setInterval(function () {
             // We change the latitude a little bit a time to create animation of car
             // By Quickly remove and add the icon, we make the car moves
-           // point.latitude += 0.00001;
-            //view.graphics.remove(pointGraphic);
+
+            
+            $.ajax({
+                //type:"GET",
+                type:"POST",
+                //url: 'http://tamubersafety.herokuapp.com/dashboard/17',
+                //crossDomain: true,
+                url:"onduties/update_car_pos",
+                data:{
+                },
+                success: function(result){
+                   
+                    var i;
+                    for(i=0;i<result.length;i++)
+                    {
+                        var curpoint=result[i];
+                        var point = {
+                            type: "point",
+                            /*
+                            longitude: curpoint.longitude,
+                            latitude: curpoint.latitude
+                            */
+                            longitude: curpoint.vehicleLng,
+                            latitude: curpoint.vehicleLat
+                            
+                        };
+                        var popInfo = {
+                            /*
+                            VehicleId: curpoint.vehicle_id,
+                            Battery: curpoint.battery,
+                            TirePressure: curpoint.tire_pressure,
+                            Occupancy: curpoint.occupancy
+                            */
+                            Driver: curpoint.driverName,
+                            Vehicle: curpoint.plateNumber,
+                            Status: curpoint.isFinished?"Available":"Occupied"
+                        };
+                        var pointGraphic = new Graphic({
+                            geometry: point,
+                            symbol: carSymbol,
+                            attributes: popInfo,
+                            // Create pop-up template, this template shows when a car icon is clicked
+                            popupTemplate: {
+                                title: "{Info}",
+                                content: [
+                                    {
+                                        type: "fields",
+                                        fieldInfos: [
+                                            {
+                                                fieldName: "Driver"
+                                            },
+                                            {
+                                                fieldName: "Vehicle"
+                                            },
+                                            {
+                                                fieldName: "Status"
+                                            }
+                                            /*
+                                            {
+                                                fieldName: "VehicleId"
+                                            },
+                                            {
+                                                fieldName: "Battery"
+                                            },
+                                            {
+                                                fieldName: "TirePressure"
+                                            },
+                                            {
+                                                fieldName: "Occupancy"
+                                            }
+                                            */
+                                        ]
+                                    }
+                                ]
+                            }
+                        });
+                        
+                        view.graphics.remove(pointGraphic);
+                        pointGraphic.geometry = point;
+                        view.graphics.add(pointGraphic);
+                        
+                    }
+                },
+                error: function(result){
+                    alert("Fail");
+                }
+            });
+            /*
+            point.latitude += 0.00001;
+            view.graphics.remove(pointGraphic);
             pointGraphic.geometry = point;
             view.graphics.add(pointGraphic);
-            //graphicsLayer.add(pointGraphic);
-        }, 75);
+            */
+        }, 5000);
+
     });
     
 })
