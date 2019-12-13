@@ -95,12 +95,22 @@ RSpec.describe DriversController, type: :controller do
     describe "#destroy" do
         before(:each) do
             @driver_3 = @driver_2 || Driver.create(name: "delete_name")
+            @event_1 = Event.create(title: @driver_3.name,
+                                    start: '2019-12-11 07:00:00',
+                                    end: '2019-12-11 10:30:00',
+                                    frequency: 'weekly',
+                                    driver_id: @driver_3.id)
         end
 
         it "destroy record" do
+          login_with ( :user )
+          expect{ delete :destroy, params: {id: @driver_3[:id]} }.to change{Driver.all.count}.by(-1)
+        end
+        it "destroy all events belongs to the driver" do
             login_with ( :user )
-            expect{ delete :destroy, params: {id: @driver_3[:id]} }.to change{Driver.all.count}.by(-1)
-        end 
+            expect{ delete :destroy, params: {id: @driver_3[:id]} }.to change{Event.find_by_driver_id(@driver_3[:id])}.to(nil)
+        end
+
 
         it "show a message after update successfully" do
             login_with ( :user )
