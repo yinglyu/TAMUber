@@ -4,7 +4,7 @@
 
 * Outline Poster  
 
-![image](https://github.com/LeonChen66/TAMUber/blob/master/reports/Poster.jpg)
+![image](https://github.com/LeonChen66/TAMUber/blob/master/reports/Poster2019Fall.jpg)
 
 
       
