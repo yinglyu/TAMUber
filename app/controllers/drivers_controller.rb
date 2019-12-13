@@ -17,11 +17,6 @@ class DriversController < ApplicationController
 	def new
 	end
 
-	def show
-		id = params[:id] # retrieve movie ID from URI route
-    	@driver = Driver.find(id) # look up driver by unique ID
-	end
-
 	def create
 		@driver = Driver.create!(driver_params)
 		flash[:notice] = "Driver #{@driver.name} was successfully created."
